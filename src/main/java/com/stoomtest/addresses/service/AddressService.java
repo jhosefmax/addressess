@@ -25,21 +25,45 @@ public class AddressService implements IAddressService{
         this._addressRepository = addressDao;
         this._mapsService = mapsService;
     }
+
+    /**
+     * Get All addresses
+     * @return List of addresses
+     */
     public List<Address> getAllAddress(){
         List<Address> lstAddress = new ArrayList<>();
         _addressRepository.findAll().forEach(lstAddress::add);
         return lstAddress;
     }
+
+    /**
+     * Get address by ID
+     * @param id Address Id
+     * @return Unique Address
+     */
     public Optional<Address> getAddressById(String id){
         Optional<Address> address = _addressRepository.findById(id);
         return address;
     }
+
+    /**
+     * Insert new address
+     * @param address Address information to insert
+     * @return Address inserted
+     */
     public Address addAddress(Address address){
         if(address.getLatitude() == null || address.getLongitude() == null){
             this.fillCoordinates(address);
         }
         return _addressRepository.insert(address);
     }
+
+    /**
+     * Update an address
+     * @param id Address Id
+     * @param address Address information to update
+     * @return Address updated
+     */
     public Address updateAddress(String id, Address address){
         Optional<Address> addressResult = this.getAddressById(id);
         if(addressResult.isPresent()){
@@ -51,6 +75,12 @@ public class AddressService implements IAddressService{
         }
         return null;
     }
+
+    /**
+     * Delete an address
+     * @param id Address Id to delete
+     * @return 1: Deleted - 0: Not deleted
+     */
     public int deleteAddress(String id){
         Optional<Address> addressExistent = this.getAddressById(id);
         if(addressExistent.isPresent()){
@@ -61,6 +91,10 @@ public class AddressService implements IAddressService{
             return 0;
     }
 
+    /**
+     * Fill Latitude and Longitude using Google Geocoding API
+     * @param address Address instance
+     */
     private void fillCoordinates(Address address){
         try {
             String completeAddress = String.format("%s, %s - %s - %s - %s",

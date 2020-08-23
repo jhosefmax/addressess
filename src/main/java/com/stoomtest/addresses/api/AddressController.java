@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +22,11 @@ public class AddressController {
     public AddressController(AddressService addressService){
         this._addressService = addressService;
     }
+
+    /**
+     * Get all address
+     * @return List of address
+     */
     @GetMapping
     public ResponseEntity<List<Address>> getAllAddress(){
         try {
@@ -37,6 +41,11 @@ public class AddressController {
         }
     }
 
+    /**
+     * Get address by ID
+     * @param id Address Id
+     * @return Unique Address
+     */
     @GetMapping(path="{id}")
     public ResponseEntity<Address> getAddressById(@PathVariable("id") String id){
         try {
@@ -51,6 +60,11 @@ public class AddressController {
         }
     }
 
+    /**
+     * Insert new address
+     * @param address Address information to insert
+     * @return Address inserted
+     */
     @PostMapping
     public ResponseEntity addAddress(@Valid @RequestBody Address address){
         try{
@@ -63,6 +77,13 @@ public class AddressController {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Update an address
+     * @param id Address Id
+     * @param address Address information to update
+     * @return Address updated
+     */
     @PutMapping(path="{id}")
     public ResponseEntity updateAddress(@NotEmpty @PathVariable("id") String id, @Valid @RequestBody Address address){
         try{
@@ -75,6 +96,12 @@ public class AddressController {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Delete an address
+     * @param id Address Id to delete
+     * @return 1: Deleted - 0: Not deleted
+     */
     @DeleteMapping(path="{id}")
     public ResponseEntity deleteAddress(@NotEmpty @PathVariable("id") String id){
         try {

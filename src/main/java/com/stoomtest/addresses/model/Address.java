@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
@@ -13,21 +12,30 @@ public class Address {
 
     @Id
     private String id;
+
     @NotBlank(message="Street Name must be informed")
     private String streetName;
+
     @NotNull(message="Number must be informed")
     private Number number;
+
     private String complement;
+
     @NotBlank(message="Neighbourhood must be informed")
     private String neighbourhood;
-    @NotEmpty(message = "City may not be empty")
+
+    @NotBlank(message = "City must be informed")
     private String city;
+
     @NotBlank(message="State must be informed")
     private String state;
+
     @NotBlank(message="Country must be informed")
     private String country;
+
     @NotBlank(message="ZipCode must be informed")
     private String zipcode;
+
     private Number latitude;
     private Number longitude;
 

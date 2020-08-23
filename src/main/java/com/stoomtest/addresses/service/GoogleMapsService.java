@@ -23,7 +23,11 @@ public class GoogleMapsService implements IGoogleMapsService {
                 .build();
     }
 
-
+    /**
+     * Get geo coordinates from Google API
+     * @param completeAddress Complete address
+     * @return Geo coordinates of the address
+     */
     public GeocodingResult getGeoCoding(String completeAddress){
 
         try {

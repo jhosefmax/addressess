@@ -5,6 +5,7 @@ import com.stoomtest.addresses.model.Address;
 import com.stoomtest.addresses.service.AddressService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.function.ThrowingRunnable;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -63,7 +64,7 @@ public class AddressesApplicationTests {
 	private IAddressRepository addressRepository;
 
 	@Test
-	public void getAllAddressTest(){
+	public void getAllAddressTestSuccess(){
 		//Arrange
 		when(addressRepository.findAll()).thenReturn(lstAddress);
 
@@ -76,7 +77,19 @@ public class AddressesApplicationTests {
 	}
 
 	@Test
-	public void getAddressByIdTest(){
+	public void getAllAddressTestFail(){
+		//Arrange
+		when(addressRepository.findAll()).thenReturn(new ArrayList<>());
+
+		//Act
+		List<Address> lstAddressResult = addressService.getAllAddress();
+
+		//Assert
+		Assert.assertEquals(0, lstAddressResult.size());
+	}
+
+	@Test
+	public void getAddressByIdTestSuccess(){
 		//Arrange
 		String id = "5f41c2cb9ab6852f1978a0e0";
 		when(addressRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(address1));
@@ -91,7 +104,21 @@ public class AddressesApplicationTests {
 	}
 
 	@Test
-	public void addAddressTest(){
+	public void getAddressByIdTestFail(){
+		//Arrange
+		String id = "5f41ef1d6bebda56e7651bd8";
+		Address returnAddress = null;
+		when(addressRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(returnAddress));
+
+		//Act
+		Address addressResult = addressService.getAddressById(id).orElse(null);
+
+		//Assert
+		Assert.assertNull(addressResult);
+	}
+
+	@Test
+	public void addAddressTestSuccess(){
 		//Arrange
 		Address newAddress = address1;
 		when(addressRepository.insert(newAddress)).thenReturn(address1);
@@ -108,7 +135,20 @@ public class AddressesApplicationTests {
 	}
 
 	@Test
-	public void updateAddressTest(){
+	public void addAddressTestFail(){
+		//Arrange
+		Address newAddress = null;
+		when(addressRepository.insert(address1)).thenReturn(null);
+
+		//Act
+		Address addressResult = addressService.addAddress(address1);
+
+		//Assert
+		Assert.assertNull(addressResult);
+	}
+
+	@Test
+	public void updateAddressTestSuccess(){
 		//Arrange
 		String id = "5f41ef1d6bebda56e7651bd8";
 		Address newAddress = address2;
@@ -127,7 +167,22 @@ public class AddressesApplicationTests {
 	}
 
 	@Test
-	public void deleteAddressTest(){
+	public void updateAddressTestFail(){
+		//Arrange
+		String id = "5f41ef1d6bebda56e7651bd8";
+		Address newAddress = null;
+		when(addressRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(newAddress));
+		when(addressRepository.save(address1)).thenReturn(null);
+
+		//Act
+		Address addressResult = addressService.updateAddress(id, address1);
+
+		//Assert
+		Assert.assertNull(addressResult);
+	}
+
+	@Test
+	public void deleteAddressTestSuccess(){
 		//Arrange
 		String id = "5f4174c7adcd985f76b4a367";
 		when(addressRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(address1));
@@ -136,7 +191,23 @@ public class AddressesApplicationTests {
 		int result = addressService.deleteAddress(id);
 
 		//Assert
+		Assert.assertEquals(1, result);
 		verify(addressRepository, times(1)).deleteById(id);
+	}
+
+	@Test
+	public void deleteAddressTestFail(){
+		//Arrange
+		String id = "5f4174c7adcd985f76b4a367";
+		Address newAddress = null;
+		when(addressRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(newAddress));
+
+		//Act
+		int result = addressService.deleteAddress(id);
+
+		//Assert
+		Assert.assertEquals(0, result);
+		verify(addressRepository, times(0)).deleteById(id);
 	}
 
 
