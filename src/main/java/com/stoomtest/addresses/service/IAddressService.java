@@ -4,13 +4,12 @@ import com.stoomtest.addresses.model.Address;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface IAddressService {
 
     List<Address> getAllAddress();
-    Optional<Address> getAddressById(UUID idAddress);
+    Optional<Address> getAddressById(String id);
     Address addAddress(Address address);
-    Address updateAddress(UUID idAddress, Address address);
-    int deleteAddress(UUID idAddress);
+    Address updateAddress(String id, Address address);
+    int deleteAddress(String id);
 }

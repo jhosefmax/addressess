@@ -1,92 +1,147 @@
 package com.stoomtest.addresses.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.UUID;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+
+@Document(collection = "addresses")
 public class Address {
 
-    private UUID Id;
-    private final String StreetName;
-    private final Number Number;
-    private final String Complement;
-    private final String Neighbourhood;
-    private final String City;
-    private final String State;
-    private final String Country;
-    private final String Zipcode;
-    private final String Latitude;
-    private final String Longitude;
+    @Id
+    private String id;
+    @NotBlank(message="Street Name must be informed")
+    private String streetName;
+    @NotNull(message="Number must be informed")
+    private Number number;
+    private String complement;
+    @NotBlank(message="Neighbourhood must be informed")
+    private String neighbourhood;
+    @NotEmpty(message = "City may not be empty")
+    private String city;
+    @NotBlank(message="State must be informed")
+    private String state;
+    @NotBlank(message="Country must be informed")
+    private String country;
+    @NotBlank(message="ZipCode must be informed")
+    private String zipcode;
+    private Number latitude;
+    private Number longitude;
 
+    public Address(){ }
 
-    public Address(@JsonProperty("id") UUID id,
-                   @JsonProperty("streetName") String streetName,
-                   @JsonProperty("number") java.lang.Number number,
-                   @JsonProperty("complement") String complement,
-                   @JsonProperty("neighbourhood") String neighbourhood,
-                   @JsonProperty("city") String city,
-                   @JsonProperty("state") String state,
-                   @JsonProperty("country") String country,
-                   @JsonProperty("zipcode") String zipcode,
-                   @JsonProperty("latitude") String latitude,
-                   @JsonProperty("longitude") String longitude) {
-        Id = id;
-        StreetName = streetName;
-        Number = number;
-        Complement = complement;
-        Neighbourhood = neighbourhood;
-        City = city;
-        State = state;
-        Country = country;
-        Zipcode = zipcode;
-        Latitude = latitude;
-        Longitude = longitude;
+    public Address(String id,
+                   String streetName,
+                   java.lang.Number number,
+                   String complement,
+                   String neighbourhood,
+                   String city,
+                   String state,
+                   String country,
+                   String zipcode,
+                   java.lang.Number latitude,
+                   java.lang.Number longitude) {
+        this.id = id;
+        this.streetName = streetName;
+        this.number = number;
+        this.complement = complement;
+        this.neighbourhood = neighbourhood;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.zipcode = zipcode;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
-    public UUID getId() {
-        return Id;
+    public String getId() {
+        return id;
     }
-    public void setId(UUID id) {
-        this.Id = id;
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getStreetName() {
-        return StreetName;
+        return streetName;
     }
 
-    public java.lang.Number getNumber() {
-        return Number;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public Number getNumber() {
+        return number;
+    }
+
+    public void setNumber(Number number) {
+        this.number = number;
     }
 
     public String getComplement() {
-        return Complement;
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
     }
 
     public String getNeighbourhood() {
-        return Neighbourhood;
+        return neighbourhood;
+    }
+
+    public void setNeighbourhood(String neighbourhood) {
+        this.neighbourhood = neighbourhood;
     }
 
     public String getCity() {
-        return City;
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getState() {
-        return State;
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getCountry() {
-        return Country;
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getZipcode() {
-        return Zipcode;
+        return zipcode;
     }
 
-    public String getLatitude() {
-        return Latitude;
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
-    public String getLongitude() {
-        return Longitude;
+    public Number getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Number latitude) {
+        this.latitude = latitude;
+    }
+
+    public Number getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Number longitude) {
+        this.longitude = longitude;
     }
 }
