@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "2e3fbe6b-3307-44bd-9e46-15901b36880b",
+		"name": "AddressApplication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddNewAddress",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"streetName\": \"Gustavo Armbrust\",\r\n    \"number\": 36,\r\n    \"complement\": null,\r\n    \"neighbourhood\": \"Cambui\",\r\n    \"city\": \"Campinas\",\r\n    \"state\": \"São Paulo\",\r\n    \"country\": \"Brasil\",\r\n    \"zipcode\": \"13042105\",\r\n    \"latitude\": null,\r\n    \"longitude\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/address",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateAddress",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"streetName\": \"Luiza Nascimbene\",\r\n    \"number\": 1160,\r\n    \"complement\": \"CASA A\",\r\n    \"neighbourhood\": \"Vila Celeste\",\r\n    \"city\": \"Ipatinga\",\r\n    \"state\": \"Minas Gerais\",\r\n    \"country\": \"Brasil\",\r\n    \"zipcode\": \"35162507\",\r\n    \"latitude\": null,\r\n    \"longitude\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/address/5f42a5e0eae13369f823c1f3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"address",
+						"5f42a5e0eae13369f823c1f3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllAddress",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/address",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAddressById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/address/5f42a5baeae13369f823c1f2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"address",
+						"5f42a5baeae13369f823c1f2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAddress",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/address/5f42a5baeae13369f823c1f2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"address",
+						"5f42a5baeae13369f823c1f2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
